@@ -17,7 +17,7 @@ class CreateTenantsTable extends Migration
             $table->increments('id');
             $table->integer('plan_id')->unsigned();
             $table->foreign('plan_id')->references('id')->on('plans');
-            //$table->uuid('uuid');
+            $table->uuid('uuid');
             $table->string('cnpj')->unique();
             $table->string('name')->unique();
             $table->string('url')->unique();

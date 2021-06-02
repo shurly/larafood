@@ -16,7 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')
     ->middleware('auth')
-    ->group(function() {
+    ->group(function () {
+
+        /**
+         * Route Users
+         */
+        Route::any('users/search', 'Admin\UserController@search')->name('users.search');
+        Route::resource('users', 'Admin\UserController');
 
         /**
          * Route Permissions X Profiles
@@ -50,7 +56,6 @@ Route::prefix('admin')
 
         Route::any('permissions/search', 'Admin\ACL\PermissionsController@search')->name('permissions.search');
         Route::resource('permissions', 'Admin\ACL\PermissionsController');
-
 
 
         /**
