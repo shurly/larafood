@@ -19,6 +19,23 @@ Route::prefix('admin')
     ->group(function () {
 
         /**
+         * Route Categories X Products
+         */
+        Route::any('products/{id}/categories/create', 'Admin\CategoryProductController@categoriesCreate')->name('products.categories.create');
+        Route::get('products/{id}/categories/{idCategory}/detach', 'Admin\CategoryProductController@detachCategoryProduct')->name('products.categories.detach');
+        Route::post('products/{id}/categories', 'Admin\CategoryProductController@attachCategoryProduct')->name('products.categories.attach');
+        Route::get('products/{id}/categories', 'Admin\CategoryProductController@categories')->name('products.categories');
+        Route::get('categories/{id}/product', 'Admin\CategoryProductController@products')->name('categories.products');
+
+
+        /**
+         * Route Tables
+         */
+        Route::any('tables/search', 'Admin\TableController@search')->name('tables.search');
+        Route::resource('tables', 'Admin\TableController');
+
+
+        /**
          * Route Categories
          */
         Route::any('categories/search', 'Admin\CategoryController@search')->name('categories.search');

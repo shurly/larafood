@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Observers;
+
+use App\Models\Table;
+use Illuminate\Support\Str;
+
+class TableObserver
+{
+    /**
+     * Handle the table "creating(" event.
+     *
+     * @param  \App\Models\Table  $table
+     * @return void
+     */
+    public function creating(Table $table)
+    {
+       //
+    }
+
+    /**
+     * Handle the table "updated" event.
+     *
+     * @param  \App\Models\Table  $table
+     * @return void
+     */
+    public function updating(Table $table)
+    {
+        //
+    }
+
+
+}

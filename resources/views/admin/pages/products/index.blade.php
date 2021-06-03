@@ -43,6 +43,7 @@
                         <td>{{$product->title}}</td>
 
                         <td style="width:10px; ">
+                            <a href="{{route('products.categories', $product->id)}}" class="btn btn-primary" title="Categorias"><i class="fas fa-layer-group"></i></a>
                             <a href="{{route('products.edit', $product->id)}}" class="btn btn-primary">Editar</a>
                             <a href="{{route('products.show', $product->id)}}" class="btn btn-warning">VER</a>
                         </td>
