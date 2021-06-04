@@ -31,7 +31,7 @@
                         <td>
                             {{ $category->name }}
                         </td>
-                        <td style="width=10px;">
+                        <td style="width: 10px">
                             <a href="{{ route('products.categories.detach', [$product->id, $category->id]) }}" class="btn btn-danger">DESVINCULAR</a>
                         </td>
                     </tr>

@@ -9,7 +9,7 @@
         <li class="breadcrumb-item active"><a href="{{route('products.categories.create', $product->id)}}">Disponíveis</a></li>
     </ol>
 
-    <h1>Cateoria disponíveis do Produto <b>{{$product->title}}</b></h1>
+    <h1>Categoria disponíveis do Produto <b>{{$product->title}}</b></h1>
 @endsection
 
 @section('content')

@@ -9,14 +9,18 @@ use Illuminate\Http\Request;
 
 class CategoryProductController extends Controller
 {
+
     protected $product, $category;
+
     public function __construct(Product $product, Category $category)
     {
         $this->product = $product;
         $this->category = $category;
+
+        $this->middleware(['can:products']);
     }
 
-        public function categories($idProduct)
+    public function categories($idProduct)
     {
         if (!$product = $this->product->find($idProduct)) {
             return redirect()->back();
@@ -34,16 +38,15 @@ class CategoryProductController extends Controller
             return redirect()->back();
         }
 
-        $product = $category->products()->paginate();
+        $products = $category->products()->paginate();
 
-        return view('admin.pages.categories.products.products', compact('category', 'product'));
+        return view('admin.pages.categories.products.products', compact('category', 'products'));
     }
 
-    public function categoriesCreate(Request  $request, $idProduct)
-    {
 
-        if(!$product =  $this->product->find($idProduct))
-        {
+    public function categoriesCreate(Request $request, $idProduct)
+    {
+        if (!$product = $this->product->find($idProduct)) {
             return redirect()->back();
         }
 
@@ -52,10 +55,10 @@ class CategoryProductController extends Controller
         $categories = $product->categoriesCreate($request->filter);
 
         return view('admin.pages.products.categories.create', compact('product', 'categories', 'filters'));
-
     }
 
-    public function attachCategoryProduct(Request $request, $idProduct)
+
+    public function attachCategoriesProduct(Request $request, $idProduct)
     {
         if (!$product = $this->product->find($idProduct)) {
             return redirect()->back();
@@ -70,22 +73,20 @@ class CategoryProductController extends Controller
         $product->categories()->attach($request->categories);
 
         return redirect()->route('products.categories', $product->id);
-
     }
 
     public function detachCategoryProduct($idProduct, $idCategory)
     {
-        $product =  $this->product->find($idProduct);
-        $category =  $this->category->find($idCategory);
-        if(!$product || !$category)
-        {
+        $product = $this->product->find($idProduct);
+        $category = $this->category->find($idCategory);
+
+        if (!$product || !$category) {
             return redirect()->back();
         }
 
         $product->categories()->detach($category);
 
         return redirect()->route('products.categories', $product->id);
-
     }
 
 }
