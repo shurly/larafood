@@ -21,6 +21,23 @@ Route::prefix('admin')
 
 
         /**
+         * Route Permissions X Roles
+         */
+        Route::any('roles/{id}/permissions/create', 'ACL\PermissionRoleController@permissionsCreate')->name('roles.permissions.create');
+        Route::get('roles/{id}/permissions/{idPermission}/detach', 'ACL\PermissionRoleController@detachPermissionsRole')->name('roles.permissions.detach');
+        Route::post('roles/{id}/permissions', 'ACL\PermissionRoleController@attachPermissionsRole')->name('roles.permissions.attach');
+        Route::get('roles/{id}/permissions', 'ACL\PermissionRoleController@permissions')->name('roles.permissions');
+        Route::get('permissions/{id}/role', 'ACL\PermissionRoleController@roles')->name('permissions.roles');
+
+
+        /**
+         * Route Roles
+         */
+        Route::any('roles/search', 'ACL\RoleController@search')->name('roles.search');
+        Route::resource('roles', 'ACL\RoleController');
+
+
+        /**
          * Route Categories X Products
          */
         Route::any('products/{id}/categories/create', 'CategoryProductController@categoriesCreate')->name('products.categories.create');
@@ -35,6 +52,13 @@ Route::prefix('admin')
          */
         Route::any('tables/search', 'TableController@search')->name('tables.search');
         Route::resource('tables', 'TableController');
+
+
+        /**
+         * Route Tenants
+         */
+        Route::any('tenants/search', 'TenantController@search')->name('tenants.search');
+        Route::resource('tenants', 'TenantController');
 
 
         /**
@@ -63,6 +87,16 @@ Route::prefix('admin')
         Route::post('profiles/{id}/permissions', 'ACL\PermissionProfileController@attachPermissionsProfile')->name('profiles.permissions.attach');
         Route::get('profiles/{id}/permissions', 'ACL\PermissionProfileController@permissions')->name('profiles.permissions');
         Route::get('permissions/{id}/profile', 'ACL\PermissionProfileController@profiles')->name('permissions.profiles');
+
+        /**
+         * Route Roles X Users
+         */
+        Route::any('users/{id}/roles/create', 'ACL\RoleUserController@rolesCreate')->name('users.roles.create');
+        Route::get('users/{id}/roles/{idRole}/detach', 'ACL\RoleUserController@detachRoleUser')->name('users.roles.detach');
+        Route::post('users/{id}/roles', 'ACL\RoleUserController@attachRoleUser')->name('users.roles.attach');
+        Route::get('users/{id}/roles', 'ACL\RoleUserController@roles')->name('users.roles');
+        Route::get('roles/{id}/users', 'ACL\RoleUserController@users')->name('roles.users');
+
 
         /**
          * Route Plans X Profiles

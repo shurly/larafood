@@ -1,21 +1,21 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuários')
+@section('title', 'Empresas')
 
 @section('content_header')
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active"><a href="{{route('users.index')}}">Usuários</a></li>
+        <li class="breadcrumb-item active"><a href="{{route('tenants.index')}}">Empresas</a></li>
     </ol>
 
-    <h1>Usuários <a href="{{ route('users.create') }}" class="btn btn-dark">Adicionar <i
+    <h1>Empresas <a href="{{ route('tenants.create') }}" class="btn btn-dark">Adicionar <i
                 class="fas fa-plus-square"></i></a></h1>
 @endsection
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <form action="{{route('users.search')}}" method="POST" class="form form-inline">
+            <form action="{{route('tenants.search')}}" method="POST" class="form form-inline">
                 @csrf
                 <input type="text" name="filter" placeholder="Pesquisar" class="form-control"
                        value="{{$filter['filter'] ?? ''}}">
@@ -27,23 +27,24 @@
             <table class="table table-condensed">
                 <thead>
                 <tr>
+                    <th>Image</th>
                     <th>Nome</th>
-                    <th>E-mail</th>
-                    <th width="300">Ações</th>
+                    <th width="250">Ações</th>
                 </tr>
                 </thead>
 
                 <tbody>
 
-                @foreach($users as $user)
+                @foreach($tenants as $tenant)
                     <tr>
-                        <td>{{$user->name}}</td>
-                        <td>{{$user->email}}</td>
+                        <td>
+                            <img src="{{url("storage/{$tenant->image}")}}" alt="{{$tenant->name}}" style="max-width: 150px">
+                        </td>
+                        <td>{{$tenant->title}}</td>
 
                         <td style="width:10px; ">
-                            <a href="{{route('users.edit', $user->id)}}" class="btn btn-primary">Editar</a>
-                            <a href="{{route('users.show', $user->id)}}" class="btn btn-warning">VER</a>
-                            <a href="{{route('users.roles', $user->id)}}" class="btn btn-info" title="Cargos"><i class="fas fa-address-book"></i></a>
+                            <a href="{{route('tenants.edit', $tenant->id)}}" class="btn btn-primary">Editar</a>
+                            <a href="{{route('tenants.show', $tenant->id)}}" class="btn btn-warning">VER</a>
                         </td>
 
                     </tr>
@@ -53,9 +54,9 @@
         </div>
         <div class="card-footer">
             @if(isset($filters))
-                {{ $users->appends($filters)->links() }}
+                {{ $tenants->appends($filters)->links() }}
             @else
-                {{ $users->links() }}
+                {{ $tenants->links() }}
             @endif
         </div>
     </div>

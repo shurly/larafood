@@ -225,6 +225,13 @@ return [
 
     'menu' => [
         [
+            'text' => 'Empresas',
+            'url'  => 'admin/tenants',
+            'icon' => 'fas fa-building',
+            'can'  => 'tenants',
+        ],
+
+        [
             'text' => 'Planos',
             'url'  => 'admin/plans',
             'icon' => 'fas fa-list-alt',
@@ -235,6 +242,13 @@ return [
             'url'  => 'admin/profiles',
             'icon' => 'fas fa-address-book',
             'can'  => 'profiles',
+        ],
+
+        [
+            'text' => 'Cargos',
+            'url'  => 'admin/roles',
+            'icon' => 'fas fa-address-card',
+            'can'  => 'roles',
         ],
         [
             'text' => 'Permissões',
