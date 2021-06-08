@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Repositories\Contracts\TenantRepositoryInterface;
 use Illuminate\Support\Str;
 use App\Models\Plan;
 
@@ -9,6 +10,17 @@ use App\Models\Plan;
 class TenantService
 {
     private $plan, $data = [];
+    private $repository;
+
+    public function __construct(TenantRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    public function getAllTenant()
+    {
+        return $this->repository->getAllTenants();
+    }
 
     public function make(Plan $plan, array $data)
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\TenantCreated;
 use App\Http\Controllers\Controller;
 use App\Services\TenantService;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -72,6 +73,8 @@ class RegisterController extends Controller
         $tenantService = app(TenantService::class);
 
        $user = $tenantService->make($plan, $data);
+
+       event(new TenantCreated($user));
 
        return $user;
     }
